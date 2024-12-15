@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
     private float wallJumpCooldown;
     private float horizontalInput;
 
-
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -24,14 +23,12 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
 
-
         if (horizontalInput > 0.01f)
             transform.localScale = Vector3.one;
         else if (horizontalInput < -0.01f)
-            transform.localScale = new Vector3(-1,1,1);
+            transform.localScale = new Vector3(-1, 1, 1);
 
-
-        anim.SetBool("run", horizontalInput != 0) ;
+        anim.SetBool("run", horizontalInput != 0);
 
         anim.SetBool("grounded", isGrounded());
 
@@ -48,10 +45,8 @@ public class PlayerMovement : MonoBehaviour
             else
                 body.gravityScale = 2;
 
-
             if (Input.GetKey(KeyCode.Space))
                 Jump();
-
 
         }
         else
@@ -65,9 +60,9 @@ public class PlayerMovement : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, jumpPower);
             anim.SetTrigger("jump");
         }
-        else if(onWall() && !isGrounded())
+        else if (onWall() && !isGrounded())
         {
-            if(horizontalInput == 0)
+            if (horizontalInput == 0)
             {
                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, 0);
                 transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
