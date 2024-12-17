@@ -14,6 +14,15 @@ public class Health : MonoBehaviour
     [SerializeField] private int numberOfFlashes;
     private SpriteRenderer spriteRend;
 
+    [Header("Components")]
+    [SerializeField] private Behaviour[] components;
+
+    [Header("Death Sound")]
+    [SerializeField] private AudioClip deathSound;
+
+    [Header("Hurt Sound")]
+    [SerializeField] private AudioClip hurtSound;
+
     private void Awake()
     {
         currentHealth = startingHealth;
@@ -28,14 +37,20 @@ public class Health : MonoBehaviour
         {
             anim.SetTrigger("hurt");
             StartCoroutine(Invunerability());
+            SoundManager.instance.PlaySound(hurtSound);
         }
         else
         {
             if (!dead)
             {
+                foreach (Behaviour component in components)
+                {
+                    component.enabled = false;
+                }
+                anim.SetBool("grounded",true);
                 anim.SetTrigger("die");
-                GetComponent<PlayerMovement>().enabled = false;
                 dead = true;
+                SoundManager.instance.PlaySound(deathSound);
             }
         }
     }
@@ -59,6 +74,11 @@ public class Health : MonoBehaviour
     public bool IsInvulnerable()
     {
         return Physics2D.GetIgnoreLayerCollision(7, 8);
+    }
+
+    private void Deactivate()
+    {
+        gameObject.SetActive(false);
     }
 
 }
