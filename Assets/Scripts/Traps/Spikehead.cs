@@ -69,12 +69,11 @@ public class Spikehead : EnemyDamage
         SoundManager.instance.PlaySound(spikeheadSound);
         base.OnTriggerEnter2D(collision);
 
-        if (collision.tag == "Block")
+        if (collision.tag == "Block" || collision.tag == "Door")
         {
-
-            Stop();
             isBlocked = true;
-            Debug.Log("Spikehead stopped by block.");
+            Stop();
+            
         }
 
         Stop();

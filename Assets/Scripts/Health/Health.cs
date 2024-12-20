@@ -16,11 +16,10 @@ public class Health : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private Behaviour[] components;
+    private bool invulnerable;
 
     [Header("Death Sound")]
     [SerializeField] private AudioClip deathSound;
-
-    [Header("Hurt Sound")]
     [SerializeField] private AudioClip hurtSound;
 
     private void Awake()
@@ -31,6 +30,7 @@ public class Health : MonoBehaviour
     }
     public void TakeDamage(float _damage)
     {
+        if (invulnerable) return;
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
 
         if (currentHealth > 0)
@@ -43,12 +43,13 @@ public class Health : MonoBehaviour
         {
             if (!dead)
             {
+                //Deactivate all attached component classes
                 foreach (Behaviour component in components)
-                {
                     component.enabled = false;
-                }
-                anim.SetBool("grounded",true);
+
+                anim.SetBool("grounded", true);
                 anim.SetTrigger("die");
+
                 dead = true;
                 SoundManager.instance.PlaySound(deathSound);
             }
@@ -60,6 +61,7 @@ public class Health : MonoBehaviour
     }
     private IEnumerator Invunerability()
     {
+        invulnerable = true;
         Physics2D.IgnoreLayerCollision(10, 11, true);
         for (int i = 0; i < numberOfFlashes; i++)
         {
@@ -69,16 +71,23 @@ public class Health : MonoBehaviour
             yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
         }
         Physics2D.IgnoreLayerCollision(10, 11, false);
+        invulnerable = false;
     }
-
-    public bool IsInvulnerable()
-    {
-        return Physics2D.GetIgnoreLayerCollision(7, 8);
-    }
-
     private void Deactivate()
     {
         gameObject.SetActive(false);
     }
 
+    //Respawn
+    public void Respawn()
+    {
+        AddHealth(startingHealth);
+        anim.ResetTrigger("die");
+        anim.Play("Idle");
+        StartCoroutine(Invunerability());
+
+        //Activate all attached component classes
+        foreach (Behaviour component in components)
+            component.enabled = true;
+    }
 }
