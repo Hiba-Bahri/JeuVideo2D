@@ -3,14 +3,33 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Game Over")]
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private AudioClip gameOverSound;
+
+    [Header("Pause")]
+    [SerializeField] private GameObject pauseScreen;
+
 
     private void Awake()
     {
         gameOverScreen.SetActive(false);
+        pauseScreen.SetActive(false);
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(pauseScreen.activeInHierarchy)
+            {
+                PauseGame(false);
+            }
+            else
+            PauseGame(true);
+        }
     }
 
+    #region Game Over
     public void GameOver()
     {
         gameOverScreen.SetActive(true);
@@ -30,4 +49,23 @@ public class UIManager : MonoBehaviour
     {
         Application.Quit();
     }
+    #endregion
+
+    #region Pause
+    public void PauseGame(bool status)
+    {
+        pauseScreen.SetActive(status);
+
+        Time.timeScale = status ? 0 : 1;
+    }
+
+    public void SFXVolume()
+    {
+        SoundManager.instance.ChangeSoundVolume(0.2f);
+    }
+    public void MusicVolume()
+    {
+        SoundManager.instance.ChangeMusicVolume(0.2f);
+    }
+    #endregion
 }
