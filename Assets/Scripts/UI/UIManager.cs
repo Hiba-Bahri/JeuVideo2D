@@ -15,6 +15,9 @@ public class UIManager : MonoBehaviour
     [Header("Level Start Text")]
     [SerializeField] private Text levelStartText;
 
+    [Header("Key Text")]
+    [SerializeField] private Text KeyText;
+
 
     private void Awake()
     {
@@ -25,6 +28,11 @@ public class UIManager : MonoBehaviour
         {
             StartCoroutine(ShowLevelStartText("Level " + (SceneManager.GetActiveScene().buildIndex)));
         }
+    }
+
+    public void showKeyText()
+    {
+        StartCoroutine(ShowLevelStartText("Get The Key To Pass To Level 2" + null));
     }
     private void Update()
     {

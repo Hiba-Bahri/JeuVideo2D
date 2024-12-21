@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float jumpPower;
+    private UIManager uiManager;
+
     private Rigidbody2D body;
     private Animator anim;
     private BoxCollider2D boxCollider;
@@ -34,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
+        uiManager = FindObjectOfType<UIManager>();
+
     }
 
     private void Update()
@@ -76,7 +80,14 @@ public class PlayerMovement : MonoBehaviour
         
         private void MoveToNextLevel()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            if (DoorKey.gotKey == true)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            else
+            {
+            uiManager.showKeyText();
+            }
         }
         
         /* if (wallJumpCooldown > 0.2f)
