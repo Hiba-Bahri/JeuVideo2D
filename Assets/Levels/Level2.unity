@@ -2410,6 +2410,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2470193955486402070, guid: 03e971ea3ac69426c8f8779771993a36, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2470193955486402070, guid: 03e971ea3ac69426c8f8779771993a36, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2470193955486402070, guid: 03e971ea3ac69426c8f8779771993a36, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2470193955486402070, guid: 03e971ea3ac69426c8f8779771993a36, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4955877090685187969, guid: 03e971ea3ac69426c8f8779771993a36, type: 3}
       propertyPath: m_LocalPosition.x
       value: 68.834465
@@ -20243,7 +20259,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.630005, y: 1.2199707}
+  m_AnchoredPosition: {x: -4.629883, y: 1.2199707}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1158298228
