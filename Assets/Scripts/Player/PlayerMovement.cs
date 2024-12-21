@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -72,6 +74,10 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         
+        private void MoveToNextLevel()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
         
         /* if (wallJumpCooldown > 0.2f)
         {
@@ -167,5 +173,14 @@ public class PlayerMovement : MonoBehaviour
     public bool canAttack()
     {
         return horizontalInput == 0 && isGrounded() && !onWall();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Check if the player collides with the final level door
+        if (collision.gameObject.CompareTag("FinalLevelDoor"))
+        {
+            MoveToNextLevel();
+        }
     }
 }
