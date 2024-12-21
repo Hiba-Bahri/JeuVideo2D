@@ -16,13 +16,15 @@ public class PlayerRespawn : MonoBehaviour
 
     public void CheckRespawn()
     {
-        if (strikes-- != 0)
+        if (--strikes != 0)
         {
+
             if (currentCheckpoint == null)
             {
                 uiManager.GameOver();
                 return;
             }
+            uiManager.showRespawnStrikesText(strikes);
             playerHealth.Respawn(); //Restore player health and reset animation
             transform.position = currentCheckpoint.position; //Move player to checkpoint location
 

@@ -18,6 +18,9 @@ public class UIManager : MonoBehaviour
     [Header("Key Text")]
     [SerializeField] private Text KeyText;
 
+    [Header("Strikes Text")]
+    [SerializeField] private Text StrikesText;
+
 
     private void Awake()
     {
@@ -34,6 +37,20 @@ public class UIManager : MonoBehaviour
     {
         StartCoroutine(ShowLevelStartText("Get The Key To Pass To Level 2" + null));
     }
+
+    public void showRespawnStrikesText(int strikes)
+    {
+        if (strikes > 1)
+        {
+            StartCoroutine(ShowLevelStartText(strikes + " Strikes Left"));
+        }
+        else
+        {
+            StartCoroutine(ShowLevelStartText("You have 1 Strike Left"));
+
+        }
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

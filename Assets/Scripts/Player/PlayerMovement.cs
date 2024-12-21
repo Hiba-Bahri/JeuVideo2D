@@ -83,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
             if (DoorKey.gotKey == true)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            DoorKey.gotKey = false;
             }
             else
             {
