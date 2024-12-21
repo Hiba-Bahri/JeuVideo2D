@@ -268,6 +268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced19deaf73f5dd48a953159a7bbb070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkpoint: {fileID: 0}
+  strikes: 3
 --- !u!1 &8526014262934557114
 GameObject:
   m_ObjectHideFlags: 0
